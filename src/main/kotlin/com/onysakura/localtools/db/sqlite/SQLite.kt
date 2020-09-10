@@ -9,6 +9,7 @@ class SQLite {
         private val LOG: CustomLogger.Log = CustomLogger.getLogger(SQLite::class)
 
         init {
+            LOG.debug("SQLite init")
             try {
                 Class.forName("org.sqlite.JDBC")
                 LOG.debug("open database successfully")
@@ -17,25 +18,25 @@ class SQLite {
             }
         }
 
-        private val c: Connection? = null
-        private val stmt: Statement? = c?.createStatement()
+        private var c: Connection? = null
+        private var stmt: Statement? = null
 
         fun init(path: String) {
-            DriverManager.getConnection("jdbc:sqlite:" + File(path).absolutePath)
+            c = DriverManager.getConnection("jdbc:sqlite:" + File(path).absolutePath)
+            stmt = c?.createStatement()
         }
 
         fun executeQuery(sql: String): ResultSet? {
             if (c == null || stmt == null) throw RuntimeException("sqlite is not init")
             LOG.debug("executeQuery: $sql")
             return try {
-                c.autoCommit = false
-                val resultSet = stmt.executeQuery(sql)
-                c.commit()
+                c!!.autoCommit = false
+                val resultSet = stmt!!.executeQuery(sql)
+                c!!.commit()
                 LOG.debug("executeQuery has resultSet: " + (resultSet != null))
                 resultSet
             } catch (e: SQLException) {
                 LOG.warn("executeUpdate sql fail, sql: $sql", e)
-                e.printStackTrace()
                 null
             }
         }
@@ -44,9 +45,9 @@ class SQLite {
             if (c == null || stmt == null) throw RuntimeException("sqlite is not init")
             LOG.debug("executeUpdate: $sql")
             return try {
-                c.autoCommit = false
-                val execute: Int = stmt.executeUpdate(sql)
-                c.commit()
+                c!!.autoCommit = false
+                val execute: Int = stmt!!.executeUpdate(sql)
+                c!!.commit()
                 LOG.debug("executeUpdate result: $execute")
                 execute
             } catch (e: SQLException) {
@@ -60,11 +61,11 @@ class SQLite {
             LOG.debug("execute: $sql")
             var success = false
             try {
-                c.autoCommit = false
-                val execute: Boolean = stmt.execute(sql)
+                c!!.autoCommit = false
+                val execute: Boolean = stmt!!.execute(sql)
                 if (execute) {
                     success = true
-                    c.commit()
+                    c!!.commit()
                 }
                 LOG.debug("execute result: $execute")
             } catch (e: SQLException) {

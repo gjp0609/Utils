@@ -1,6 +1,6 @@
 package com.onysakura.localtools.log
 
-import com.onysakura.localtools.date.DateUtils
+import com.onysakura.localtools.basic.DateUtils
 import java.io.File
 import java.io.IOException
 import java.io.PrintWriter
@@ -55,8 +55,8 @@ class CustomLogger {
             }
         }
 
-        fun getLogger(loggerName: KClass<*>): Log {
-            val logger: Logger = Logger.getLogger(loggerName.simpleName)
+        fun getLogger(loggerName: String): Log {
+            val logger: Logger = Logger.getLogger(loggerName)
             logger.useParentHandlers = false
             logger.level = Level.ALL
             val consoleHandler = ConsoleHandler()
@@ -67,6 +67,14 @@ class CustomLogger {
                 logger.addHandler(fileHandler)
             }
             return Log(logger)
+        }
+
+        fun getLogger(clazz: Class<*>): Log {
+            return getLogger(clazz.simpleName)
+        }
+
+        fun getLogger(kClass: KClass<*>): Log {
+            return getLogger(kClass.toString())
         }
 
         private fun getShortClassName(className: String): String? {

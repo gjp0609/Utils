@@ -12,6 +12,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation("org.xerial:sqlite-jdbc:3.32.3.2")
+    testImplementation(kotlin("test-testng"))
 }
 
 java {
@@ -29,6 +30,9 @@ kotlin {
         main {
             kotlin.srcDir("src/main/kotlin")
         }
+        test {
+            kotlin.srcDir("src/test/kotlin")
+        }
     }
 }
 
@@ -39,4 +43,16 @@ tasks {
             languageVersion = "1.4"
         }
     }
+
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = "11"
+            languageVersion = "1.4"
+        }
+    }
+
+    test {
+        useTestNG()
+    }
 }
+

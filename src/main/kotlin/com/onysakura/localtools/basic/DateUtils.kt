@@ -1,4 +1,4 @@
-package com.onysakura.localtools.date
+package com.onysakura.localtools.basic
 
 import java.text.SimpleDateFormat
 import java.util.*
