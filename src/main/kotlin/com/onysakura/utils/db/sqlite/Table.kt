@@ -1,4 +1,4 @@
-package com.onysakura.localtools.db.sqlite
+package com.onysakura.utils.db.sqlite
 
 @kotlin.annotation.Target
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)

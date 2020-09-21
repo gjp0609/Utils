@@ -1,10 +1,11 @@
-package com.onysakura.localtools.db.sqlite
+package com.onysakura.utils.db.sqlite
 
-import com.onysakura.localtools.basic.StringUtils
-import com.onysakura.localtools.basic.StringUtils.Companion.humpToUnderline
-import com.onysakura.localtools.db.sqlite.SQLite.Companion.executeQuery
-import com.onysakura.localtools.db.sqlite.SQLite.Companion.executeUpdate
-import com.onysakura.localtools.log.CustomLogger
+import com.onysakura.utils.basic.IdUtils
+import com.onysakura.utils.basic.StringUtils
+import com.onysakura.utils.basic.StringUtils.Companion.humpToUnderline
+import com.onysakura.utils.db.sqlite.SQLite.Companion.executeQuery
+import com.onysakura.utils.db.sqlite.SQLite.Companion.executeUpdate
+import com.onysakura.utils.log.CustomLogger
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.lang.reflect.ParameterizedType
@@ -150,7 +151,7 @@ class BaseRepository<T>(modelClass: Class<T>?) {
         val values: MutableList<String> = mutableListOf()
         try {
             val setId: Method = modelClass.getDeclaredMethod("setId", String::class.java)
-            setId.invoke(t, StringUtils.getNextId())
+            setId.invoke(t, IdUtils.getNextId())
             for (fieldName: String in fieldNames) {
                 fields.add(fieldName)
                 val methodName: String = generateGetMethodName(fieldName)

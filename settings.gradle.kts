@@ -1,1 +1,1 @@
-rootProject.name = "LocalTools"
+rootProject.name = "Utils"

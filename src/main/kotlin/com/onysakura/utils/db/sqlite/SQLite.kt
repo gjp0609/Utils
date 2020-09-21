@@ -1,6 +1,6 @@
-package com.onysakura.localtools.db.sqlite
+package com.onysakura.utils.db.sqlite
 
-import com.onysakura.localtools.log.CustomLogger
+import com.onysakura.utils.log.CustomLogger
 import java.io.File
 import java.sql.*
 

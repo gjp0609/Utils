@@ -1,18 +1,27 @@
 plugins {
     kotlin("jvm") version "1.4.0"
     `java-library`
+    `maven-publish`
 }
 
+group = "com.onysakura"
+version = "0.0.1"
+
 repositories {
-    maven("https://maven.aliyun.com/repository/public/")
     mavenLocal()
+    maven("https://maven.aliyun.com/repository/public/")
+    jcenter()
     mavenCentral()
 }
 
 dependencies {
+    val moshiVersion = "1.9.3"
+    val sqliteJdbcVersion = "3.32.3.2"
+
     implementation(kotlin("stdlib"))
-    implementation("org.xerial:sqlite-jdbc:3.32.3.2")
-    testImplementation(kotlin("test-testng"))
+    implementation("org.xerial:sqlite-jdbc:$sqliteJdbcVersion")
+    implementation("com.squareup.moshi:moshi:$moshiVersion")
+    implementation("com.squareup.moshi:moshi-kotlin:$moshiVersion")
 }
 
 java {
@@ -50,9 +59,4 @@ tasks {
             languageVersion = "1.4"
         }
     }
-
-    test {
-        useTestNG()
-    }
 }
-

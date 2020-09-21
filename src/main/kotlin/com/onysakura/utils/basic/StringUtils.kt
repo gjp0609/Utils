@@ -1,37 +1,11 @@
-package com.onysakura.localtools.basic
+package com.onysakura.utils.basic
 
-import com.onysakura.localtools.log.CustomLogger
-import java.util.*
+import com.onysakura.utils.log.CustomLogger
 
 class StringUtils {
 
     companion object {
         private val LOG: CustomLogger.Log = CustomLogger.getLogger(StringUtils::class)
-        private val SNOWFLAKE_ID_WORKER: SnowflakeIdWorker = SnowflakeIdWorker(0, 0)
-
-        /**
-         * 获取 snowflake id
-         */
-        fun getNextId(): String {
-            val nextId: Long = SNOWFLAKE_ID_WORKER.nextId()
-            return nextId.toString()
-        }
-
-        fun splitString(src: String, split: Char): List<String> {
-            val list: MutableList<String> = ArrayList()
-            var temp = StringBuilder()
-            for (c: Char in src.toCharArray()) {
-                if (split == c) {
-                    list.add(temp.toString())
-                    temp = StringBuilder()
-                } else {
-                    temp.append(c)
-                }
-            }
-            list.add(temp.toString())
-            return list
-        }
-
 
         /**
          * 驼峰转下划线

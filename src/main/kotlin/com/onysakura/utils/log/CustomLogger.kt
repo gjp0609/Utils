@@ -1,6 +1,6 @@
-package com.onysakura.localtools.log
+package com.onysakura.utils.log
 
-import com.onysakura.localtools.basic.DateUtils
+import com.onysakura.utils.basic.DateUtils
 import java.io.File
 import java.io.IOException
 import java.io.PrintWriter
@@ -95,16 +95,16 @@ class CustomLogger {
     }
 
     open class Log(private val logger: Logger) {
-        fun debug(msg: Any) {
-            logger.fine(msg.toString())
+        fun debug(msg: Any?) {
+            logger.fine(msg?.toString())
         }
 
-        fun info(msg: Any) {
-            logger.info(msg.toString())
+        fun info(msg: Any?) {
+            logger.info(msg?.toString())
         }
 
-        fun warn(msg: Any) {
-            logger.warning(msg.toString())
+        fun warn(msg: Any?) {
+            logger.warning(msg?.toString())
         }
 
         fun warn(msg: Any, exception: Exception) {

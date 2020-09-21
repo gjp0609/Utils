@@ -1,4 +1,4 @@
-package com.onysakura.localtools.basic
+package com.onysakura.utils.basic
 
 class SnowflakeIdWorker(
         /**
@@ -11,9 +11,9 @@ class SnowflakeIdWorker(
         private var datacenterId: Long) {
 
     /**
-     * 开始时间截 (2015-01-01)
+     * 开始时间截 (2020-09-13)
      */
-    private val twepoch = 1420041600000L
+    private val twepoch = 1600000000000L
 
     /**
      * 机器id所占的位数
